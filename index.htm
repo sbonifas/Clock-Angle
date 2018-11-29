@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Steve's Clock Angle Measurer</title>
+<head>
+<body>
+<p>Enter Time:</p>
+<p>Hour: <input type=number id="hour" min="0" max="24" value=0>
+Minute: <input type=number id="minute" min="0" max="60" value=0>
+<button onclick=
+"getAngle(document.getElementById('hour').value, document.getElementById('minute').value)">
+Get Angle</button>
+</p>
+<p>Angle: <span id="Angle">0</span></p>
+<script>
+function getAngle(hour, minute){
+	var angle;
+	angle = angleFromTime(hour, minute);
+	document.getElementById("Angle").innerHTML = angle;
+}
+function angleFromTime(hour, minute){
+	var angleHourHand, angleMinuteHand, angle;
+	angleHourHand = Math.round(360 * hour / 12 + minute/2) % 360;
+	angleMinuteHand = 6 * minute;
+	angle = Math.abs(angleHourHand - angleMinuteHand);
+	if (angle > 180){
+		angle = 360 - angle;
+	}
+	return angle;
+}
+</script>
+</body>
+</html>
